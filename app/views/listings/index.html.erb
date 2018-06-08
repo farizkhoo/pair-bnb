@@ -1,0 +1,32 @@
+<h1> LISTINGS </h1>
+
+<p>Found <%= @listing_count %> results</p>
+<% @listings.each do |t| %>
+<h3><%= t.name %> at <%= t.location %></h3>
+<h5><%= t.description %>
+<%= t.property_type %></h5>
+<h6>RM <%= t.price %> onwards</h6>
+<a href="/listings/<%= t.id %>">View Listing</a>
+<p>__________________________________________________________________________________________</p>
+<% end %> 
+
+<!--  create_table "listings", force: :cascade do |t|
+    t.string "location"
+    t.string "tags"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.integer "place_type"
+    t.string "property_type"
+    t.integer "room_number"
+    t.integer "bed_number"
+    t.integer "guest_number"
+    t.string "country"
+    t.string "state"
+    t.string "city"
+    t.integer "zipcode"
+    t.integer "price"
+    t.string "description"
+    t.index ["user_id"], name: "index_listings_on_user_id"
+  end -->
