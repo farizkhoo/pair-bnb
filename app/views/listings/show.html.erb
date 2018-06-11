@@ -1,9 +1,12 @@
 <h1><%= @listing.name %> at <%= @listing.location %></h1>
 
-<% @listing.attributes.keys.each do |k| %>
-	<div id="<%= k %>"><%= k %>: <%= @listing[k] %></div>
-<% end %> 
+<%= @listing.display_infos.html_safe %>
 
+<% if (current_user.moderator? || current_user.admin?) && @listing.verified == false %>
+<%= button_to "Verify", action: "verify" %>
+<% end %>
+
+<h2><a href="/listings">Back to listings</a></h2>
 <!--  create_table "listings", force: :cascade do |t|
     t.string "location"
     t.string "tags"
