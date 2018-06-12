@@ -1,12 +1,24 @@
 class ListingsController < ApplicationController
-	before_action :require_host_admin, only: [:create, :new, :update, :edit]
+	before_action :require_host_admin, only: [:update, :edit]
 	before_action :require_host_moderator_admin, only: [:destroy]
 	before_action :require_moderator_admin, only: [:verify]
 	before_action :require_customer, only: [:reserve]
+	before_action :require_host, only: [:new, :create]
 	
-	def new
-		@listing = Listing.find(params[:id])
+	def create
+		@new = current_user.listings.new(listing_params)
+		if @new.save
+			redirect_to '/listings/tobeverified'
+		end
     end 
+
+    def tobeverified
+    end
+
+    def new
+    	@user = current_user
+    	@listing = Listing.new
+    end
 
 	def index
 		@listing_count = Listing.where(verified: true).count
@@ -45,6 +57,10 @@ class ListingsController < ApplicationController
 	end
 
 	private
+	def listing_params
+		params.require(:listing).permit(:location, :tags, :name, :place_type, :property_type, :room_number, :bed_number, :guest_number, :country, :state, :city, :zipcode, :price, :description)
+	end
+
 	def require_host_admin
 		unless current_user == Listing.find(params[:id]).user || current_user.admin?
 			flash[:notice] = "Sorry. You are not allowed to perform this action."
@@ -72,6 +88,13 @@ class ListingsController < ApplicationController
         redirect_to 'listing_path(params[:id])', notice: "Sorry. You do not have the permissino to verify a property."
 		end
 	end
+
+	def require_host
+		unless current_user == User.find(params[:user_id]) || current_user.admin?
+			flash[:notice] = "Sorry. You are not allowed to perform this action."
+        redirect_to 'listing_path(params[:id])', notice: "Sorry. You do not have the permissino to verify a property."
+		end
+	end	
 end
 
 
