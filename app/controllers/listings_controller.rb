@@ -58,7 +58,7 @@ class ListingsController < ApplicationController
 
 	private
 	def listing_params
-		params.require(:listing).permit(:location, :tags, :name, :place_type, :property_type, :room_number, :bed_number, :guest_number, :country, :state, :city, :zipcode, :price, :description)
+		params.require(:listing).permit(:location, :tags, :name, :place_type, :property_type, :room_number, :bed_number, :guest_number, :country, :state, :city, :zipcode, :price, :description, :image)
 	end
 
 	def require_host_admin
@@ -78,7 +78,7 @@ class ListingsController < ApplicationController
 	def require_moderator_admin
 		unless current_user.moderator? || current_user.admin?
 			flash[:notice] = "Sorry. You are not allowed to perform this action."
-        redirect_to listing_path(params[:id]), notice: "Sorry. You do not have the permissino to verify a property."
+        redirect_to 'listing_path(params[:id])', notice: "Sorry. You do not have the permissino to verify a property."
 		end
 	end
 

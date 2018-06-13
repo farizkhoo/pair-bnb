@@ -8,12 +8,16 @@ Rails.application.routes.draw do
   resources :users, controller: "users", only: [:create] do
     resource :password, controller: "passwords", only: [:create, :edit, :update]
     resources :listings, controller: "listings", only: [:new, :edit, :update, :index, :create]
+    resources :reservations, controller: "reservations", only: [:show]
   end
+
+  resources :reservations, controller: "reservations", only: [:new, :create, :destroy]
 
   resources :listings, controller: "listings", only: [:show, :index] #get "/listings" => "listings#index"
   # get "/listings"
   
   get "/users/edit" => "users#edit", as: "edit_user"
+  resources :users, controller: "users", only: [:edit]
   post "/listings/:id/verify" => "listings#verify", as: "verify_listing"
   get "/sign_in" => "sessions#new", as: "sign_in"
   delete "/sign_out" => "sessions#destroy", as: "sign_out"
