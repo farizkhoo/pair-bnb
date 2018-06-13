@@ -16,7 +16,8 @@
 <a href="/listings/unverified">Back to Unverified Listings</a>
 <% end %>
 
-<%= link_to 'Reserve', new_reservation_path(listing_id: @listing.id) %>
+<%= link_to 'Reserve', new_user_listing_reservation_path(listing_id: @listing.id, user_id: current_user) %>
+
 
 <!--  create_table "listings", force: :cascade do |t|
     t.string "location"

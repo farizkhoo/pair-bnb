@@ -7,13 +7,17 @@ Rails.application.routes.draw do
 
   resources :users, controller: "users", only: [:create] do
     resource :password, controller: "passwords", only: [:create, :edit, :update]
-    resources :listings, controller: "listings", only: [:new, :edit, :update, :index, :create]
-    resources :reservations, controller: "reservations", only: [:show]
+    resources :reservations, controller: "reservations", only: [:index, :show]
+
+    resources :listings, controller: "listings", only: [:new, :edit, :update, :index, :create] do
+      resources :reservations, controller: "reservations", only: [:new, :create, :destroy]
+    end
   end
 
-  resources :reservations, controller: "reservations", only: [:new, :create, :destroy]
 
-  resources :listings, controller: "listings", only: [:show, :index] #get "/listings" => "listings#index"
+  resources :listings, controller: "listings", only: [:show, :index] do #get "/listings" => "listings#index"
+    # resources :reservations, controller: "reservations", only: [:new, :create, :destroy]
+  end
   # get "/listings"
   
   get "/users/edit" => "users#edit", as: "edit_user"
@@ -24,6 +28,7 @@ Rails.application.routes.draw do
   get "/sign_up" => "users#new", as: "sign_up"
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   get "/admin" => "admin#index", as: "admin"
+  get "/listings/:listing_id/reservations/new" => "reservations#new", as: "new_listing_reservation"
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
