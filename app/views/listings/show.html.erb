@@ -2,6 +2,10 @@
 
 <%= @listing.display_infos.html_safe %>
 
+<%= image_tag @listing.image_url if @listing.image_url.present? %>
+
+<%#= link_to 'Home', root_path %>
+
 <% if (current_user.moderator? || current_user.admin?) && @listing.verified == false %>
 <%= button_to "Verify", action: "verify" %>
 <% end %>
@@ -11,6 +15,10 @@
 <% if (current_user.moderator? || current_user.admin?) %>
 <a href="/listings/unverified">Back to Unverified Listings</a>
 <% end %>
+
+<%= link_to 'Reserve', new_user_listing_reservation_path(listing_id: @listing.id, user_id: current_user) %>
+
+
 <!--  create_table "listings", force: :cascade do |t|
     t.string "location"
     t.string "tags"
