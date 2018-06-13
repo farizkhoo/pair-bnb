@@ -3,6 +3,8 @@ class User < ApplicationRecord
 	has_many :authentications, dependent: :destroy
 	has_many :listings, dependent: :destroy
 	enum role: [:customer, :host, :moderator, :admin]
+	mount_uploader :avatar, AvatarUploader
+	has_many :reservation
 
 	def self.create_with_auth_and_hash(authentication, auth_hash)
 	  user = self.create!(
@@ -10,7 +12,8 @@ class User < ApplicationRecord
 	    last_name: auth_hash["info"]["last_name"],
 	    email: auth_hash["info"]["email"],
 	    password: SecureRandom.hex(10),
-	    role: auth_hash["info"]["email"] == "fariz.khoo2@gmail.com" ? 3 : 0
+	    role: auth_hash["info"]["email"] == "fariz.khoo2@gmail.com" ? 3 : 0,
+	    role: auth_hash["info"]["email"] == "ashtsl21@gmail.com" ? 3 : 0
 	  )
 	  user.authentications << authentication
 	  return user

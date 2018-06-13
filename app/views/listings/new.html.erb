@@ -1,0 +1,37 @@
+<h1>NEW LISTING</h1>
+
+<!-- <form method = "post" action = "create">
+<p>Location: <input type = "text" name = "location"></p>
+<p>Tags: <input type = "text" name = "tags"></p>
+<p>Name: <input type = "text" name = "name"></p>
+<p>Place Type: <input type = "text" name = "place_type"></p>
+<p>Number of Rooms: <input type = "text" name = "room_number"></p>
+<p>Number of Beds: <input type = "text" name = "bed_number"></p>
+<p>Number of Guests: <input type = "text" name = "guest_number"></p>
+<p>Country: <input type = "text" name = "country"></p>
+<p>State: <input type = "text" name = "state"></p>
+<p>City: <input type = "text" name = "city"></p>
+<p>Zipcode: <input type = "text" name = "zipcode"></p>
+<p>Price: <input type = "text" name = "price"></p>
+<p>Description: <input type = "text" name = "description"></p>
+<input type = "submit" value = "Submit">
+</form> -->
+
+
+<%= form_for [current_user, @listing] do |f| %>
+  Location: <%= f.text_field :location %><br />
+  Tags : <%= f.text_field :tags %><br />
+  Name : <%= f.text_field :name %><br />
+  Place Type : <%= f.text_field :place_type %><br />
+  Number of Rooms : <%= f.text_field :room_number %><br />
+  Number of Beds : <%= f.text_field :bed_number %><br />
+  Number of Guests : <%= f.text_field :guest_number %><br />
+  Country : <%= f.text_field :country %><br />
+  State : <%= f.text_field :state %><br />
+  City : <%= f.text_field :city %><br />
+  Zipcode : <%= f.text_field :zipcode %><br />
+  Price : <%= f.text_field :price %><br />
+  Description : <%= f.text_area :description %><br />
+  Image : <%= f.file_field :image %><br />
+  <%= f.submit %>
+<% end %>
