@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "/listings/unverified" => "listings#unverified", as: "unverified_listings"
   get "/listings/tobeverified" => "listings#tobeverified", as: "tobeverified_listings"
 
-  resources :users, controller: "users", only: [:create] do
+  resources :users, controller: "users", only: [:create, :update] do
     resource :password, controller: "passwords", only: [:create, :edit, :update]
     resources :listings, controller: "listings", only: [:new, :edit, :update, :index, :create]
   end
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get "/sign_up" => "users#new", as: "sign_up"
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   get "/admin" => "admin#index", as: "admin"
+
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

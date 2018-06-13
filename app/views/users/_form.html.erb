@@ -1,9 +1,46 @@
+<div class="first_name-field">
+  <%= form.label :first_name %>
+  <%= form.text_field :first_name%>
+</div>
+
+<div class="last_name-field">
+  <%= form.label :last_name %>
+  <%= form.text_field :last_name%>
+</div>
+
 <div class="text-field">
   <%= form.label :email %>
   <%= form.text_field :email, type: 'email' %>
 </div>
 
+
+
+<%= form.radio_button(:gender, "male", checked: @user.gender == 0) %>
+<%= form.label(:gender_male, "I am a boy") %>
+<%= form.radio_button(:gender, "female", checked: @user.gender == 1) %>
+<%= form.label(:gender_female, "I am a girl") %>
+
+<div class="phone-field">
+  <%= form.label :phone %>
+  <%= form.text_field :phone%>
+</div>
+
+<div class="country-field">
+  <%= form.label :country %>
+  <%= form.text_field :country%>
+</div>
+
+<div class="birthdate-field">
+  <%= form.label :birthdate %>
+  <%= form.text_field :birthdate%>
+</div>
+
 <div class="password-field">
   <%= form.label :password %>
-  <%= form.password_field :password %>
+  <%= form.password_field :password, placeholder: "Input only if changing" %>
+</div>
+
+<div class="avatar-field">
+  <%= form.label :avatar %>
+  <%= form.file_field :avatar %>
 </div>
