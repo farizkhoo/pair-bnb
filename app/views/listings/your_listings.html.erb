@@ -1,0 +1,10 @@
+<h1>Your Listings</h1>
+
+<% @listings.each do |x| %>
+	<p><a href="/listings/<%= x.id %>"><%= x.name %> at <%= x.location %></a></p>
+	<p><a href="/listings/<%= x.id %>/reservations">View Listing Reservations</a></p>
+	<p>Number of reservations: <%= Reservation.where(listing_id: x.id).count %></p>
+	<hr>
+
+<% end %>
+

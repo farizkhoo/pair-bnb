@@ -5,9 +5,14 @@ Rails.application.routes.draw do
   get "/listings/unverified" => "listings#unverified", as: "unverified_listings"
   get "/listings/tobeverified" => "listings#tobeverified", as: "tobeverified_listings"
 
-  resources :users, controller: "users", only: [:create, :update] do
+
+  get "/user/listings" => "listings#your_listings", as: "your_listings"
+  get "/user/reservations" => "reservations#your_reservations", as: "your_reservations"
+
+
+  resources :users, controller: "users", only: [:create] do
     resource :password, controller: "passwords", only: [:create, :edit, :update]
-    resources :reservations, controller: "reservations", only: [:index, :show]
+    resources :reservations, controller: "reservations", only: [:show]
 
     resources :listings, controller: "listings", only: [:new, :edit, :update, :index, :create] do
       resources :reservations, controller: "reservations", only: [:new, :create, :destroy]
@@ -19,8 +24,9 @@ Rails.application.routes.draw do
     # resources :reservations, controller: "reservations", only: [:new, :create, :destroy]
   end
   # get "/listings"
-  
-  get "/users/edit" => "users#edit", as: "edit_user"
+
+  get "/user/edit" => "users#edit", as: "edit_user"
+  patch "/user" => "users#update", as: "update_user"
   resources :users, controller: "users", only: [:edit]
   post "/listings/:id/verify" => "listings#verify", as: "verify_listing"
   get "/sign_in" => "sessions#new", as: "sign_in"
@@ -29,6 +35,7 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   get "/admin" => "admin#index", as: "admin"
   get "/listings/:listing_id/reservations/new" => "reservations#new", as: "new_listing_reservation"
+  get "/listings/:listing_id/reservations" => "reservations#listing_reservations", as: "listing_reservations"
 
 
 

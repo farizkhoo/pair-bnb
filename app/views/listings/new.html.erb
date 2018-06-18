@@ -23,6 +23,7 @@
   Tags : <%= f.text_field :tags %><br />
   Name : <%= f.text_field :name %><br />
   Place Type : <%= f.text_field :place_type %><br />
+  Property Type : <%= f.text_field :property_type %><br />
   Number of Rooms : <%= f.text_field :room_number %><br />
   Number of Beds : <%= f.text_field :bed_number %><br />
   Number of Guests : <%= f.text_field :guest_number %><br />
@@ -32,6 +33,6 @@
   Zipcode : <%= f.text_field :zipcode %><br />
   Price : <%= f.text_field :price %><br />
   Description : <%= f.text_area :description %><br />
-  Image : <%= f.file_field :image %><br />
+  Image : <%= f.file_field :image, multiple: true%><br />
   <%= f.submit %>
 <% end %>

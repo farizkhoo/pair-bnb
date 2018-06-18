@@ -1,7 +1,11 @@
 <% if signed_in? %>
 	<h1>Hello <%= current_user.first_name %></h1>
 
-	<h2><a href="/listings">View Listings</a></h2>
+	<h2><a href="/listings">View Available Listings</a></h2>
 
-	<h2><a href="/users/edit">Edit profile</a></h2>
+	<h2><a href="/user/listings">View Your Listings</a></h2>
+
+	<h2><%= link_to "Edit Profile", edit_user_path %></h2>
+
+	<h2><a href="/users/<%= current_user.id %>/reservations">View your reservations</a></h2>
 <% end %>

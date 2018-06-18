@@ -56,9 +56,14 @@ class ListingsController < ApplicationController
 		@listing = Listing.find(params[:id])
 	end
 
+	def your_listings
+		@listings = Listing.where(user_id: current_user.id)
+		render "listings/your_listings"
+	end
+
 	private
 	def listing_params
-		params.require(:listing).permit(:location, :tags, :name, :place_type, :property_type, :room_number, :bed_number, :guest_number, :country, :state, :city, :zipcode, :price, :description, :image)
+		params.require(:listing).permit(:location, :tags, :name, :place_type, :property_type, :room_number, :bed_number, :guest_number, :country, :state, :city, :zipcode, :price, :description, {:image => []})
 	end
 
 	def require_host_admin

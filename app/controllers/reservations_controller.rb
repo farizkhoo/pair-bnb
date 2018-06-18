@@ -7,10 +7,10 @@ class ReservationsController < ApplicationController
 		@reservation = Reservation.new
 	end
 
-	def create
-		@reservation = current_user.reservation.create(reservation_params)
-		@reservation.listing_id = params[:listing_id]
-		@reservation.user_id = params[:user_id]
+	def create	
+		@reservation = current_user.reservations.create(reservation_params)
+		# @reservation.end_date = params[end_date]
+		Listing.find(params[:listing_id]).reservations << @reservation
 
 		if @reservation.save
 			redirect_to user_reservations_path(current_user) # 'reservations/show'
@@ -21,8 +21,17 @@ class ReservationsController < ApplicationController
 	end
 
 	def index
-		@reservations = Reservation.find_by(user_id: current_user.id)
-		@listing = @reservations.listing_id
+		@reservations = Reservation.where(user_id: current_user.id)
+	end
+
+	def your_reservations
+		@reservations = Reservation.where(user_id: current_user.id)
+	end
+
+	def listing_reservations
+		@listing = Listing.find(params[:listing_id])
+		@reservations = Reservation.where(listing_id: params[:listing_id])
+		render "listings/listing_reservations"
 	end
 
 	def show

@@ -1,0 +1,13 @@
+<h1>Your Listings Reservations</h1>
+
+
+
+<% if !@listing.reservations.empty? %>
+<% @reservations.each do |x| %>
+Start Date: <%= x.start_date %><br/>
+End Date: <%= x.end_date %><br/>
+Booked by: <%= User.find(x.user_id).name %>
+	<% end %>
+	<% else %>
+	<p>No reservations for this listing</p>
+<% end %>

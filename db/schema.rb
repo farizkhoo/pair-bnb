@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2018_06_12_150815) do
     t.integer "price"
     t.string "description"
     t.boolean "verified", default: false
-    t.string "image"
+    t.json "image"
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 

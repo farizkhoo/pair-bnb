@@ -4,7 +4,7 @@ class User < ApplicationRecord
 	has_many :listings, dependent: :destroy
 	enum role: [:customer, :host, :moderator, :admin]
 	mount_uploader :avatar, AvatarUploader
-	has_many :reservation
+	has_many :reservations
 
 	def self.create_with_auth_and_hash(authentication, auth_hash)
 	  user = self.create!(

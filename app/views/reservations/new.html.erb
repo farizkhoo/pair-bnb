@@ -1,6 +1,52 @@
 <%= form_for [current_user, @listing, @reservation] do |f| %>
-  Start Date: <%= f.date_field :start_date %><br />
-  End Date : <%= f.date_field :end_date %><br />
+ 
   Guest Number : <%= f.text_field :guest_number %><br />
+
+	<div class="container">
+	    <div class='col-md-5'>
+	        <div class="form-group">
+	            <div class='input-group date'>
+	                <input type='text' id='datetimepicker6' class="form-control" name="reservation[start_date]"/>
+	                <span class="input-group-addon">
+	                    <span class="glyphicon glyphicon-calendar"></span>
+	                </span>
+	            </div>
+	        </div>
+	    </div>
+	    <div class='col-md-5'>
+	        <div class="form-group">
+	            <div class='input-group date'>
+	                <input type='text' id="datetimepicker7" class="form-control" name="reservation[end_date]"/>
+	                <span class="input-group-addon">
+	                    <span class="glyphicon glyphicon-calendar"></span>
+	                </span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
   <%= f.submit %>
 <% end %>
+
+<script type="text/javascript">
+	
+		console.log("script loaded");
+
+		const $container = $('.container');
+
+		console.log($container);
+
+	    $(function () {
+	        $('#datetimepicker6').datetimepicker({
+	        	format: "YYYY/MM/DD"
+	        });
+	        $('#datetimepicker7').datetimepicker({
+	        	format: "YYYY/MM/DD"
+	        });
+	        $("#datetimepicker6").on("dp.change", function (e) {
+	            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+	        });
+	        $("#datetimepicker7").on("dp.change", function (e) {
+	            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+	        });
+	    });
+</script>

@@ -2,7 +2,13 @@
 
 <%= @listing.display_infos.html_safe %>
 
-<%= image_tag @listing.image_url if @listing.image_url.present? %>
+<% if @listing.image.count != 0 %>
+<% @listing.image.each do |x| %>
+    <img src="<%= x.thumb.url %>">
+<% end %>
+<% end %>
+
+
 
 <%#= link_to 'Home', root_path %>
 

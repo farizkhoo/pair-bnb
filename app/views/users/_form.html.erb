@@ -16,9 +16,9 @@
 
 
 <%= form.radio_button(:gender, "male", checked: @user.gender == 0) %>
-<%= form.label(:gender_male, "I am a boy") %>
+<%= form.label(:gender_male, "Male") %>
 <%= form.radio_button(:gender, "female", checked: @user.gender == 1) %>
-<%= form.label(:gender_female, "I am a girl") %>
+<%= form.label(:gender_female, "Female") %>
 
 <div class="phone-field">
   <%= form.label :phone %>
@@ -37,10 +37,13 @@
 
 <div class="password-field">
   <%= form.label :password %>
-  <%= form.password_field :password, placeholder: "Input only if changing" %>
+  <%= form.password_field :password%>
 </div>
 
 <div class="avatar-field">
   <%= form.label :avatar %>
+  <% if @user.avatar != nil %>
+    <%= image_tag current_user.avatar.thumb.to_s %>
+  <% end %>
   <%= form.file_field :avatar %>
 </div>
