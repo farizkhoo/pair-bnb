@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'braintree/new'
   root 'welcome#index'
   resources :passwords, controller: "passwords", only: [:create, :new]
   resource :session, controller: "sessions", only: [:create]
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
   get "/admin" => "admin#index", as: "admin"
   get "/listings/:listing_id/reservations/new" => "reservations#new", as: "new_listing_reservation"
   get "/listings/:listing_id/reservations" => "reservations#listing_reservations", as: "listing_reservations"
+  post "braintree/checkout"
 
 
 

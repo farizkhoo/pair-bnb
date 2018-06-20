@@ -16,6 +16,9 @@
 <%= button_to "Verify", action: "verify" %>
 <% end %>
 
+<% if (current_user.admin? || current_user.id == @listing.user_id) %>
+    <h3><%= link_to 'Edit listing', edit_user_listing_path(current_user.id) %></h3>
+<% end %>
 <h2><a href="/listings">Back to listings</a></h2>
 
 <% if (current_user.moderator? || current_user.admin?) %>

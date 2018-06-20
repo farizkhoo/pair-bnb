@@ -31,10 +31,17 @@ class ListingsController < ApplicationController
 
 	def edit
 		@listing = Listing.find(params[:id])
+		@user = User.find(params[:user_id])
 	end
 
 	def update		
+
 		@listing = Listing.find(params[:id])
+		@listing.update(listing_params)
+
+		flash[:notice] = "Listing successfully updated"
+
+		redirect_to edit_user_listing_path
 	end
 
 	def destroy
@@ -63,7 +70,7 @@ class ListingsController < ApplicationController
 
 	private
 	def listing_params
-		params.require(:listing).permit(:location, :tags, :name, :place_type, :property_type, :room_number, :bed_number, :guest_number, :country, :state, :city, :zipcode, :price, :description, {:image => []})
+		params.require(:listing).permit(:location, :tags, :name, :place_type, :property_type, :room_number, :bed_number, :guest_number, :country, :state, :city, :zipcode, :price, :description, :listing_cover, {:image => []})
 	end
 
 	def require_host_admin

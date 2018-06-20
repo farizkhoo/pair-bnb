@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_12_150815) do
+ActiveRecord::Schema.define(version: 2018_06_19_104300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2018_06_12_150815) do
     t.string "description"
     t.boolean "verified", default: false
     t.json "image"
+    t.string "listing_cover"
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 

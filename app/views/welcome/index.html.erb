@@ -1,11 +1,24 @@
 <% if signed_in? %>
 	<h1>Hello <%= current_user.first_name %></h1>
-
-	<h2><a href="/listings">View Available Listings</a></h2>
-
-	<h2><a href="/user/listings">View Your Listings</a></h2>
-
-	<h2><%= link_to "Edit Profile", edit_user_path %></h2>
-
-	<h2><a href="/users/<%= current_user.id %>/reservations">View your reservations</a></h2>
 <% end %>
+
+<h1>Welcome to FrizzBNB</h1>
+
+
+<div id="welcome-gallery" class="container">
+	<div class="row">
+		<% @listings.each do |listing| %>
+		<div class="col-sm-3">
+			<div class="welcome-gallery-listing-image">
+				<% if listing.listing_cover != nil %>
+				<%= link_to image_tag(listing.listing_cover.thumb.to_s), listing_path(listing.id) %>
+				<% end %>
+			</div>
+			<div class="welcome-gallery-listing-tag">
+				<%= link_to "#{listing.name} at #{listing.location}", listing_path(listing.id) %>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>
+

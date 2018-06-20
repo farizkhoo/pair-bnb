@@ -6,7 +6,7 @@
 	    <div class='col-md-5'>
 	        <div class="form-group">
 	            <div class='input-group date'>
-	                <input type='text' id='datetimepicker6' class="form-control" name="reservation[start_date]"/>
+	                <input type='text' id='datetimepicker6' class="form-control" name="reservation[start_date]" autocomplete="false" />
 	                <span class="input-group-addon">
 	                    <span class="glyphicon glyphicon-calendar"></span>
 	                </span>
@@ -16,7 +16,7 @@
 	    <div class='col-md-5'>
 	        <div class="form-group">
 	            <div class='input-group date'>
-	                <input type='text' id="datetimepicker7" class="form-control" name="reservation[end_date]"/>
+	                <input type='text' id="datetimepicker7" class="form-control" name="reservation[end_date]" autocomplete="false" />
 	                <span class="input-group-addon">
 	                    <span class="glyphicon glyphicon-calendar"></span>
 	                </span>
@@ -37,16 +37,18 @@
 
 	    $(function () {
 	        $('#datetimepicker6').datetimepicker({
-	        	format: "YYYY/MM/DD"
+	        	format: "YYYY/MM/DD",
+	        	disabledDates: <%= raw @dates %>
 	        });
 	        $('#datetimepicker7').datetimepicker({
-	        	format: "YYYY/MM/DD"
+	        	format: "YYYY/MM/DD",
+	        	disabledDates: <%= raw @dates %>
 	        });
 	        $("#datetimepicker6").on("dp.change", function (e) {
-	            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+	            $('#datetimepicker7').data("DateTimePicker").minDate(e.date.add(1,"day"));
 	        });
 	        $("#datetimepicker7").on("dp.change", function (e) {
-	            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+	            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date.add(-1,"day"));
 	        });
 	    });
 </script>

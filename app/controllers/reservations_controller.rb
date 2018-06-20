@@ -4,24 +4,33 @@ class ReservationsController < ApplicationController
 
 	def new
 		@listing = Listing.find(params[:listing_id])
+		@dates = []
+		@reservations = @listing.reservations
+		@reservations.each do |r|
+			@dates += (r.start_date.to_date...r.end_date.to_date).to_a
+			@dates.map!{|z| z.to_s}
+		end
 		@reservation = Reservation.new
 	end
 
 	def create	
-		@reservation = current_user.reservations.create(reservation_params)
+		@reservation = current_user.reservations.new(reservation_params)
 		# @reservation.end_date = params[end_date]
-		Listing.find(params[:listing_id]).reservations << @reservation
+		@reservation.listing_id = params[:listing_id]
 
 		if @reservation.save
-			redirect_to user_reservations_path(current_user) # 'reservations/show'
+			flash[:success] = "Reservation successful!"
+
+			redirect_to your_reservations_path # 'reservations/show'
 		else
 			# redirect_to new_reservation_path
-			redirect_to listings_path # render :new
+			flash[:error] = "Failed to reserve"
+
+			redirect_to listing_path(params[:listing_id]) # render :new
 		end
 	end
 
 	def index
-		@reservations = Reservation.where(user_id: current_user.id)
 	end
 
 	def your_reservations

@@ -6,5 +6,7 @@
 	<li>Start Date: <%= x.start_date %></li>
 	<li>End Date: <%= x.end_date %></li>
 	<li>Number of Guests: <%= x.guest_number %></li>
+	<%= link_to "Make Payment", braintree_new_path %>
+
 	<hr>
 <% end %>

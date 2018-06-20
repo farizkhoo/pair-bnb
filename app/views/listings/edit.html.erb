@@ -1,0 +1,8 @@
+<h1>Edit Listing <%= @listing.id %></h1>
+
+
+<%= form_for [@user, @listing] do |form| %>
+	<%= render partial: '/listings/form', object: form %>
+	  <%= form.submit %>
+
+	<% end %>

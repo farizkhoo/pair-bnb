@@ -18,21 +18,9 @@
 </form> -->
 
 
-<%= form_for [current_user, @listing] do |f| %>
-  Location: <%= f.text_field :location %><br />
-  Tags : <%= f.text_field :tags %><br />
-  Name : <%= f.text_field :name %><br />
-  Place Type : <%= f.text_field :place_type %><br />
-  Property Type : <%= f.text_field :property_type %><br />
-  Number of Rooms : <%= f.text_field :room_number %><br />
-  Number of Beds : <%= f.text_field :bed_number %><br />
-  Number of Guests : <%= f.text_field :guest_number %><br />
-  Country : <%= f.text_field :country %><br />
-  State : <%= f.text_field :state %><br />
-  City : <%= f.text_field :city %><br />
-  Zipcode : <%= f.text_field :zipcode %><br />
-  Price : <%= f.text_field :price %><br />
-  Description : <%= f.text_area :description %><br />
-  Image : <%= f.file_field :image, multiple: true%><br />
-  <%= f.submit %>
+<%= form_for [current_user, @listing] do |form| %>
+
+  <%= render partial: '/listings/form', object: form %>
+  
+  <%= form.submit %>
 <% end %>

@@ -53,6 +53,8 @@ GEM
       msgpack (~> 1.0)
     bootstrap3-datetimepicker-rails (4.17.47)
       momentjs-rails (>= 2.8.1)
+    braintree (2.89.0)
+      builder (>= 2.0.0)
     builder (3.2.3)
     byebug (10.0.2)
     capybara (3.2.1)
@@ -275,6 +277,7 @@ DEPENDENCIES
   bcrypt (~> 3.1, >= 3.1.5)
   bootsnap (>= 1.1.0)
   bootstrap3-datetimepicker-rails (~> 4.17.47)
+  braintree
   byebug
   capybara (>= 2.15, < 4.0)
   carrierwave (~> 1.0)
