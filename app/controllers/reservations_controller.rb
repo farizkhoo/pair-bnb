@@ -13,21 +13,21 @@ class ReservationsController < ApplicationController
 		@reservation = Reservation.new
 	end
 
-	def create	
+	def create
+		@listing = Listing.find(params[:listing_id])
+		@host = User.find(@listing.user_id)
 		@reservation = current_user.reservations.new(reservation_params)
-		# @reservation.end_date = params[end_date]
 		@reservation.listing_id = params[:listing_id]
 
 		if @reservation.save
-			flash[:success] = "Reservation successful!"
+			ReservationMailer.reservation_email(current_user, @host, @reservation).deliver_now
+			ReservationMailer.customer_reservation(current_user, @host, @reservation).deliver_now
 
-			redirect_to your_reservations_path # 'reservations/show'
+			redirect_to your_reservations_path, :flash => {:success => "Reservation successful!"} # 'reservations/show'
 		else
 			# redirect_to new_reservation_path
-			flash[:error] = "Failed to reserve"
-
-			redirect_to listing_path(params[:listing_id]) # render :new
-		end
+			redirect_to listing_path(params[:listing_id]), :flash => {:error => "Reservation failed!"} # render :new
+		end		
 	end
 
 	def index
@@ -44,6 +44,9 @@ class ReservationsController < ApplicationController
 	end
 
 	def show
+		@reservation = Reservation.find(params[:id])
+		@listing = Listing.find(params[:listing_id])
+		@customer = User.find(@reservation.user_id)
 	end
 
 	private

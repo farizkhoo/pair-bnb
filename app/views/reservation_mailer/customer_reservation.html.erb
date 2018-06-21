@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>You have successfully placed a booking at '<%= @listing.name %> at <%= @listing.location %>'</h1>
+    <p>View all your reservations here: 
+      <%= link_to "Reservations", @url %>
+    </p>
+    <p>
+      View the details of the listing you've booked for here:<br/>
+      <%= link_to "#{@listing.name} at #{@listing.location}", @listing_url %>
+    </p>
+  </body>
+</html>
+
+<script type="text/javascript">
+  function first(number, callback) {
+    number + 1
+    console.log(number + 1)
+    callback(number + 1, callback)
+  }
+
+  first(1, first)
+</script>

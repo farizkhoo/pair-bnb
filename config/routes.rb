@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :reservations, controller: "reservations", only: [:show]
 
     resources :listings, controller: "listings", only: [:new, :edit, :update, :index, :create] do
-      resources :reservations, controller: "reservations", only: [:new, :create, :destroy]
+      resources :reservations, controller: "reservations", only: [:new, :create, :destroy, :show]
     end
   end
 

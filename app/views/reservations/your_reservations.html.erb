@@ -2,7 +2,7 @@
 
 <% current_user.reservations.each_with_index do |x,index|%>
 <ul>Booking <%=index+1%></ul>
-	<li><%=Listing.find(x.listing_id).name%></li>
+	<li>Location: <%=Listing.find(x.listing_id).name%></li>
 	<li>Start Date: <%= x.start_date %></li>
 	<li>End Date: <%= x.end_date %></li>
 	<li>Number of Guests: <%= x.guest_number %></li>

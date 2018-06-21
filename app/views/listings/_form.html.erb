@@ -73,6 +73,12 @@
   <%= form.file_field :listing_cover%>
 </div>
 
+<%= form.label :avatar %>
+  <% if @user.avatar != nil %>
+    <%= image_tag current_user.avatar.thumb.to_s %>
+  <% end %>
+  <%= form.file_field :avatar %>
+
 <div class="image-field">
   <%= form.label :image %>
   <%= form.file_field :image, multiple: true%>
