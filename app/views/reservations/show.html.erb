@@ -1,0 +1,7 @@
+<h1>Reservation <%= @reservation.id %></h1>
+
+<ul>Reservation at <%= @listing.name %> by <%= @customer.first_name %>
+	<li>From: <%= @reservation.start_date %></li>
+	<li>To: <%= @reservation.end_date %></li>
+	<li>Number of guests: <%= @reservation.guest_number %></li>
+</ul>

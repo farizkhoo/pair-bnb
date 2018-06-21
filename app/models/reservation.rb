@@ -6,8 +6,7 @@ class Reservation < ApplicationRecord
     # validates :check_in, presence: true
     # validates :check_out, presence: true
     validate :check_overlapping_dates, if: :check_error
-    belongs_to :user
-    belongs_to :listing
+    
     def check_error
         self.errors.blank?
     end 

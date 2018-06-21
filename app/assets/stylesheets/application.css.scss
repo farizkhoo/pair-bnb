@@ -14,13 +14,10 @@
  *= require_self
  */
 @import 'bootstrap-datetimepicker';
+@import url('https://fonts.googleapis.com/css?family=Lobster');
 
-#id {
-	color: green;
-}
-
-#description {
-	color: purple;
+body {
+	font-family: 'Lobster', cursive;
 }
 
 #profile-picture-img {

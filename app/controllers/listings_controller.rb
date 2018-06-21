@@ -35,13 +35,12 @@ class ListingsController < ApplicationController
 	end
 
 	def update		
-
 		@listing = Listing.find(params[:id])
-		@listing.update(listing_params)
-
-		flash[:notice] = "Listing successfully updated"
-
-		redirect_to edit_user_listing_path
+		if @listing.update(listing_params)
+			redirect_to listing_path, :flash => { :success => "Listing successfully updated" }
+		else
+			redirect_to edit_user_listing_path, :flash => { :error => "Failed to update" }
+		end
 	end
 
 	def destroy
